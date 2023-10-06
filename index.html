@@ -57,7 +57,7 @@
             <input id="textinput" type="text" placeholder="key in what you want to say" style="margin: 0px; height: 50px; width: 400px;padding: 10px; border-radius: 5px; border: 1px solid black;" ></input>
         
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="createListItem()" style="height: 50px; margin: 0px;">See results</button>
+            <button type="button" id = "resultButton" class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="createListItem()" style="height: 50px; margin: 0px;">See results</button>
         </div>
     
     
@@ -97,6 +97,14 @@
             'threat': "You are threatening",
             'toxicity': "You are toxic",
         }
+
+        // Create a event listener for the textinput upon pressing enter
+        document.getElementById("textinput").addEventListener("keyup", function(event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                document.getElementById("resultButton").click();
+            }
+        });
         
         function createListItem(){
             var res = document.getElementById('modalBody');
