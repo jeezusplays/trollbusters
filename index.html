@@ -7,7 +7,18 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     
+    <style>
+        .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 10px;
+        }
+    </style>
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -25,21 +36,60 @@
             </div>
         </div>
     </nav>
-        <input id="textinput" type="text" placeholder="key in what you want to say"></input>
-        <!-- <input type="submit" value="submit"> -->
-    <!-- </form> -->
+
+    <div class="center">
+        <input id="textinput" type="text" placeholder="key in what you want to say" style="margin: 0px; height: 50px; width: 400px;padding: 10px; border-radius: 5px; border: 1px solid black;" ></input>
+    
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="createListItem()" style="height: 50px; margin: 0px;">See results</button>
+    </div>
+
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header" style="justify-content: center;">
+            <h4 class="modal-title">ARE YOU TROLLING?</h4>
+        </div>
+        <div id="modalBody" class="modal-body" style="text-align: center;">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+
+    </div>
+    </div>
+
     <div>
-        <ul id="responseList">
-        </ul>
+        <ul id="responseList"></ul>
     </div>
 
 
     
     <script>
-        var list = document.getElementById('responseList');
-        document.getElementById("textinput").addEventListener("change", createListItem)
+        // document.getElementById("textinput").addEventListener("change", createListItem)
+
+        var mapping = {
+            'identity_attack': "You are attacking another person's identity",
+            'insult': "You are insulting",
+            'obscene': "You are obscene",
+            'severe_toxicity': "You are severly toxic",
+            'sexual_explicit': "You are being explicit",
+            'threat': "You are threatening",
+            'toxicity': "You are toxic",
+        }
         
         function createListItem(){
+            var res = document.getElementById('modalBody');
+            res.innerHTML = "";
+            var loading = document.createElement('p');
+            loading.innerText = `Loading...`
+            res.appendChild(loading);
+
             
             const sentences = document.getElementById("textinput").value;
             
@@ -48,7 +98,6 @@
             // Load the model. Users optionally pass in a threshold and an array of
             // labels to include.
             toxicity.load(threshold).then(model => {
-    
                 model.classify(sentences).then(predictions => {
                     // `predictions` is an array of objects, one for each prediction head,
                     // that contains the raw probabilities for each input along with the
@@ -57,11 +106,15 @@
                     // list.innerHTML =''
         
                     console.log(predictions);
+                    res.innerHTML = "";
+
 
                     predictions.forEach((elem) => {
-                        var entry = document.createElement('li');
-                        entry.appendChild(document.createTextNode(`${elem.label}: ${elem.results[0].match}`));
-                        list.appendChild(entry);
+                        if (elem.results[0].match){
+                            var entry = document.createElement('p');
+                            entry.innerText = `${mapping[elem.label]}`
+                            res.appendChild(entry);
+                        }
                     });
                     /*
                     prints:
@@ -81,8 +134,14 @@
                     },
                     ...
                     */
+                    if(res.innerHTML.trim() == "") {
+                        var entry = document.createElement('p');
+                        entry.innerText = `You are clean!`
+                        res.appendChild(entry);
+                    }       
                 });
             });
+
         }
 
     </script>
