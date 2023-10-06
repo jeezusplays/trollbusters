@@ -7,9 +7,30 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #caf0f8
+        }
+        .header {
+            background-color: #03045e;
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+        }
+        .content {
+            padding: 30px;
+        }
+        .navstyle{
+            background-color: #90e0ef;
+        }
+        .nav-link{
+            color: #caf0f8;
+        }
+    </style>
+
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light navstyle">
         <div class="container">
             <a class="navbar-brand" href="index.html">Troll Testing</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,6 +38,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="troll_info.html">Info</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="help.html">Help Page</a>
                     </li>
@@ -54,6 +78,25 @@
         <section id="section6">
             <h2>Policies and Guidelines</h2>
             <!-- Add content for Policies and Guidelines section -->
+        </section>
+
+        <section id="contact" class="container my-4">
+            <h2>Contact Us</h2>
+            <form action="send_email.php" method="POST">
+                <div class="form-group">
+                    <label for="name">Your Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Describe the Troubles You Are Facing:</label>
+                    <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Email</button>
+            </form>
         </section>
     </main>
 
