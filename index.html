@@ -27,9 +27,9 @@
         
         function createListItem(){
             
-            const sentences = document.getElementById("textinput").innerText;
+            const sentences = document.getElementById("textinput").value;
             
-            const threshold = 0.8;
+            const threshold = 0.7;
     
             // Load the model. Users optionally pass in a threshold and an array of
             // labels to include.
@@ -48,7 +48,6 @@
                         var entry = document.createElement('li');
                         entry.appendChild(document.createTextNode(`${elem.label}: ${elem.results[0].match}`));
                         list.appendChild(entry);
-
                     });
                     /*
                     prints:
