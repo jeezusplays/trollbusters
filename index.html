@@ -27,10 +27,10 @@
         
         function createListItem(){
             
-            const sentences = document.getElementById("textinput").innerText;
-            
+            const sentences = document.getElementById("textinput").value;
+            console.log(sentences)
             const threshold = 0.8;
-    
+            
             // Load the model. Users optionally pass in a threshold and an array of
             // labels to include.
             toxicity.load(threshold).then(model => {
