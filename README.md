@@ -102,5 +102,5 @@ Examples:
 [forks-url]: https://github.com/jeezusplays/trollbusters/network/members
 [stars-shield]: https://img.shields.io/github/stars/jeezusplays/trollbusters.svg?style=for-the-badge
 [stars-url]: https://github.com/jeezusplays/trollbusters/stargazers
-[issues-shield]: https://img.shields.io/github/issues/jeezusplays/README-Template.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/jeezusplays/trollbusters.svg?style=for-the-badge
 [issues-url]: https://github.com/jeezusplays/trollbusters/issues
